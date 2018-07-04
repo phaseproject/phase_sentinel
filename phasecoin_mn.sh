@@ -1,5 +1,5 @@
 echo "=================================================================="
-echo "Protoncoin MN Install"
+echo "phasecoin MN Install"
 echo "=================================================================="
 
 #read -p 'Enter your masternode genkey you created in windows, then hit [ENTER]: ' GENKEY
@@ -39,16 +39,15 @@ free -h
 echo "SWAP setup complete..."
 #end optional swap section
 
-wget https://github.com/padima2/protoncoin/releases/download/v2.0.0/protoncoin-linux-no-qt-v2.0.0.tar.gz
+wget https://github.com/phaseproject/phase/releases/download/2.1.0/phase_2.1.0_linux.tar.gz
 
-rm -rf proton
-mkdir proton
-tar -zxvf protoncoin-linux-no-qt-v2.0.0.tar.gz -C proton
+rm -rf phase
+tar -zxvf phase_2.1.0_linux.tar.gz
 
 echo "Loading and syncing wallet"
 
 echo "If you see *error: Could not locate RPC credentials* message, do not worry"
-~/proton/proton-cli stop
+~/phase_2.1.0_linux/phase-cli stop
 sleep 10
 echo ""
 echo "=================================================================="
@@ -56,31 +55,31 @@ echo "DO NOT CLOSE THIS WINDOW OR TRY TO FINISH THIS PROCESS "
 echo "PLEASE WAIT 5 MINUTES UNTIL YOU SEE THE RELOADING WALLET MESSAGE"
 echo "=================================================================="
 echo ""
-~/proton/protond -daemon
+~/phase_2.1.0_linux/phased -daemon
 sleep 250
-~/proton/proton-cli stop
+~/phase_2.1.0_linux/phase-cli stop
 sleep 20
 
-cat <<EOF > ~/.protoncore/proton.conf
-rpcuser=protoncoin
+cat <<EOF > ~/.phasecore/phase.conf
+rpcuser=phasecoin
 rpcpassword=${PASSWORD}
 EOF
 
 echo "Reloading wallet..."
-~/proton/protond -daemon
+~/phase_2.1.0_linux/phased -daemon
 sleep 30
 
 echo "Making genkey..."
-GENKEY=$(~/proton/proton-cli masternode genkey)
+GENKEY=$(~/phase/phase-cli masternode genkey)
 
 echo "Mining info..."
-~/proton/proton-cli getmininginfo
-~/proton/proton-cli stop
+~/phase_2.1.0_linux/phase-cli getmininginfo
+~/phase_2.1.0_linux/phase-cli stop
 
 echo "Creating final config..."
 
-cat <<EOF > ~/.protoncore/proton.conf
-rpcuser=protoncoin
+cat <<EOF > ~/.phasecore/phase.conf
+rpcuser=phasecoin
 rpcpassword=$PASSWORD
 rpcallowip=127.0.0.1
 server=1
@@ -92,11 +91,9 @@ externalip=$WANIP
 maxconnections=256
 masternode=1
 masternodeprivkey=$GENKEY
-addnode=80.211.6.157
-addnode=80.211.191.122
-addnode=80.211.134.193
-addnode=80.211.137.157
-addnode=212.237.33.234
+addnode=80.211.25.138
+addnode=104.10.207.74
+addnode=24.228.90.13
 EOF
 
 #echo "Setting basic security..."
@@ -122,16 +119,16 @@ EOF
 #echo "Basic security completed..."
 
 echo "Restarting wallet with new configs, 30 seconds..."
-~/proton/protond -daemon
+~/phase_2.1.0_linux/phased -daemon
 sleep 30
 
 echo "Installing sentinel..."
-cd /root/.protoncore
+cd /root/.phasecore
 sudo apt-get install -y git python-virtualenv
 
-sudo git clone https://github.com/padima1/proton_sentinel.git
+sudo git clone https://github.com/phaseproject/phase_sentinel.git
 
-cd proton_sentinel
+cd phase_sentinel
 
 export LC_ALL=C
 sudo apt-get install -y virtualenv
@@ -139,13 +136,13 @@ sudo apt-get install -y virtualenv
 virtualenv ./venv
 ./venv/bin/pip install -r requirements.txt
 
-echo "proton_conf=/root/.protoncore/proton.conf" >> /root/.protoncore/proton_sentinel/sentinel.conf
+echo "phase_conf=/root/.phasecore/phase.conf" >> /root/.phasecore/phase_sentinel/sentinel.conf
 
 echo "Adding crontab jobs..."
 crontab -l > tempcron
 #echo new cron into cron file
-echo "* * * * * cd /root/.protoncore/proton_sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >> tempcron
-echo "@reboot /bin/sleep 20 ; /root/proton/protond -daemon &" >> tempcron
+echo "* * * * * cd /root/.phasecore/phase_sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >> tempcron
+echo "@reboot /bin/sleep 20 ; /root/phase_2.1.0_linux/phased -daemon &" >> tempcron
 
 #install new cron file
 crontab tempcron
@@ -154,13 +151,13 @@ rm tempcron
 SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
 echo "Sentinel Installed"
 
-echo "proton-cli getmininginfo:"
-~/proton/proton-cli getmininginfo
+echo "phase-cli getmininginfo:"
+~/phase_2.1.0_linux/phase-cli getmininginfo
 
 sleep 15
 
 echo "Masternode status:"
-~/proton/proton-cli masternode status
+~/phase_2.1.0_linux/phase-cli masternode status
 
 echo "If you get \"Masternode not in masternode list\" status, don't worry, you just have to start your MN from your local wallet and the status will change"
 echo ""
@@ -168,5 +165,5 @@ echo "INSTALLED WITH VPS IP: $WANIP:$PORT"
 sleep 1
 echo "INSTALLED WITH MASTERNODE PRIVATE GENKEY: $GENKEY"
 sleep 1
-echo "rpcuser=protoncoin"
+echo "rpcuser=phasecoin"
 echo "rpcpassword=$PASSWORD"
