@@ -65,7 +65,7 @@ def has_phase_conf():
 
     # ensure phase_conf exists & readable
     #
-    # if not, print a message stating that Proton Core must be installed and
+    # if not, print a message stating that Phase Core must be installed and
     # configured, including JSONRPC access in phase.conf
     try:
         f = io.open(config.phase_conf)
@@ -96,7 +96,7 @@ def main():
         sys.exit(1)
 
     if not has_phase_conf():
-        print("ProtonCore must be installed and configured, including JSONRPC access in phase.conf")
+        print("PhaseCore must be installed and configured, including JSONRPC access in phase.conf")
         sys.exit(1)
 
 

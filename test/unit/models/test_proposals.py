@@ -78,9 +78,9 @@ def proposal():
 
 
 def test_proposal_is_valid(proposal):
-    from phased import ProtonDaemon
+    from phased import PhaseDaemon
     import phaselib
-    phased = ProtonDaemon.from_phase_conf(config.phase_conf)
+    phased = PhaseDaemon.from_phase_conf(config.phase_conf)
 
     orig = Proposal(**proposal.get_dict())  # make a copy
 
@@ -149,7 +149,7 @@ def test_proposal_is_valid(proposal):
     proposal.payment_address = '221 B Baker St., London, United Kingdom'
     assert proposal.is_valid() is False
 
-    # this is actually the Proton foundation multisig address...
+    # this is actually the Phase foundation multisig address...
     proposal.payment_address = '7gnwGHt17heGpG9Crfeh4KGpYNFugPhJdh'
     assert proposal.is_valid() is False
 
@@ -237,8 +237,8 @@ def test_proposal_is_deletable(proposal):
 
 # deterministic ordering
 def test_approved_and_ranked(go_list_proposals):
-    from phased import ProtonDaemon
-    phased = ProtonDaemon.from_phase_conf(config.phase_conf)
+    from phased import PhaseDaemon
+    phased = PhaseDaemon.from_phase_conf(config.phase_conf)
 
     for item in go_list_proposals:
         (go, subobj) = GovernanceObject.import_gobject_from_phased(phased, item)

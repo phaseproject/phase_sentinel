@@ -8,12 +8,12 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'lib'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 import config
 
-from phased import ProtonDaemon
-from phase_config import ProtonConfig
+from phased import PhaseDaemon
+from phase_config import PhaseConfig
 
 
 def test_phased():
-    config_text = ProtonConfig.slurp_config_file(config.phase_conf)
+    config_text = PhaseConfig.slurp_config_file(config.phase_conf)
     network = 'mainnet'
     is_testnet = False
     genesis_hash = u'00000e1728b630fd83aecbc51546c7915fffb7d3c897b5fd8c4b14043070b7f0'
@@ -23,13 +23,13 @@ def test_phased():
             is_testnet = True
             genesis_hash = u'0000000f350d9039575f6446584f4ae4317bed76aae26ef1f2381ff73f7cd68d'
 
-    creds = ProtonConfig.get_rpc_creds(config_text, network)
-    phased = ProtonDaemon(**creds)
+    creds = PhaseConfig.get_rpc_creds(config_text, network)
+    phased = PhaseDaemon(**creds)
     assert phased.rpc_command is not None
 
     assert hasattr(phased, 'rpc_connection')
 
-    # Proton testnet block 0 hash == 0000000f350d9039575f6446584f4ae4317bed76aae26ef1f2381ff73f7cd68d
+    # Phase testnet block 0 hash == 0000000f350d9039575f6446584f4ae4317bed76aae26ef1f2381ff73f7cd68d
     # test commands without arguments
     info = phased.rpc_command('getinfo')
     info_keys = [

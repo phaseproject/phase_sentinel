@@ -13,7 +13,7 @@ from decimal import Decimal
 import time
 
 
-class ProtonDaemon():
+class PhaseDaemon():
     def __init__(self, **kwargs):
         host = kwargs.get('host', '127.0.0.1')
         user = kwargs.get('user')
@@ -32,9 +32,9 @@ class ProtonDaemon():
 
     @classmethod
     def from_phase_conf(self, phase_dot_conf):
-        from phase_config import ProtonConfig
-        config_text = ProtonConfig.slurp_config_file(phase_dot_conf)
-        creds = ProtonConfig.get_rpc_creds(config_text, config.network)
+        from phase_config import PhaseConfig
+        config_text = PhaseConfig.slurp_config_file(phase_dot_conf)
+        creds = PhaseConfig.get_rpc_creds(config_text, config.network)
 
         return self(**creds)
 

@@ -1,7 +1,7 @@
 # Phase Sentinel
 
 
-Sentinel is an autonomous agent for persisting, processing and automating Proton governance objects and tasks.
+Sentinel is an autonomous agent for persisting, processing and automating Phase governance objects and tasks.
 
 Sentinel is implemented as a Python application that binds to a local version phased instance on each Phase Masternode.
 
@@ -20,7 +20,7 @@ Update system packages and ensure virtualenv is installed:
     $ sudo apt-get update
     $ sudo apt-get -y install python-virtualenv
 
-Make sure the local Proton daemon running is at least version 1.0.1
+Make sure the local Phase daemon running is at least version 1.0.1
 
     $ phase-cli getinfo | grep version
 
