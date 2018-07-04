@@ -43,11 +43,12 @@ wget https://github.com/phaseproject/phase/releases/download/2.1.0/phase_2.1.0_l
 
 rm -rf phase
 tar -zxvf phase_2.1.0_linux.tar.gz
+mv phase_2.1.0_linux phase
 
 echo "Loading and syncing wallet"
 
 echo "If you see *error: Could not locate RPC credentials* message, do not worry"
-~/phase_2.1.0_linux/phase-cli stop
+~/phase/phase-cli stop
 sleep 10
 echo ""
 echo "=================================================================="
@@ -55,9 +56,9 @@ echo "DO NOT CLOSE THIS WINDOW OR TRY TO FINISH THIS PROCESS "
 echo "PLEASE WAIT 5 MINUTES UNTIL YOU SEE THE RELOADING WALLET MESSAGE"
 echo "=================================================================="
 echo ""
-~/phase_2.1.0_linux/phased -daemon
+~/phase/phased -daemon
 sleep 250
-~/phase_2.1.0_linux/phase-cli stop
+~/phase/phase-cli stop
 sleep 20
 
 cat <<EOF > ~/.phasecore/phase.conf
@@ -66,15 +67,15 @@ rpcpassword=${PASSWORD}
 EOF
 
 echo "Reloading wallet..."
-~/phase_2.1.0_linux/phased -daemon
+~/phase/phased -daemon
 sleep 30
 
 echo "Making genkey..."
 GENKEY=$(~/phase/phase-cli masternode genkey)
 
 echo "Mining info..."
-~/phase_2.1.0_linux/phase-cli getmininginfo
-~/phase_2.1.0_linux/phase-cli stop
+~/phase/phase-cli getmininginfo
+~/phase/phase-cli stop
 
 echo "Creating final config..."
 
@@ -119,7 +120,7 @@ EOF
 #echo "Basic security completed..."
 
 echo "Restarting wallet with new configs, 30 seconds..."
-~/phase_2.1.0_linux/phased -daemon
+~/phase/phased -daemon
 sleep 30
 
 echo "Installing sentinel..."
@@ -142,7 +143,7 @@ echo "Adding crontab jobs..."
 crontab -l > tempcron
 #echo new cron into cron file
 echo "* * * * * cd /root/.phasecore/phase_sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >> tempcron
-echo "@reboot /bin/sleep 20 ; /root/phase_2.1.0_linux/phased -daemon &" >> tempcron
+echo "@reboot /bin/sleep 20 ; /root/phase/phased -daemon &" >> tempcron
 
 #install new cron file
 crontab tempcron
@@ -152,12 +153,12 @@ SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
 echo "Sentinel Installed"
 
 echo "phase-cli getmininginfo:"
-~/phase_2.1.0_linux/phase-cli getmininginfo
+~/phase/phase-cli getmininginfo
 
 sleep 15
 
 echo "Masternode status:"
-~/phase_2.1.0_linux/phase-cli masternode status
+~/phase/phase-cli masternode status
 
 echo "If you get \"Masternode not in masternode list\" status, don't worry, you just have to start your MN from your local wallet and the status will change"
 echo ""
