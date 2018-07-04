@@ -20,7 +20,7 @@ import argparse
 
 
 # sync protond gobject list with our local relational DB backend
-def perform_protond_object_sync(phased):
+def perform_phased_object_sync(phased):
     GovernanceObject.sync(phased)
 
 
