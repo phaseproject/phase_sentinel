@@ -1,9 +1,9 @@
 #!/bin/bash
 set -evx
 
-mkdir ~/.protoncore
+mkdir ~/.phasecore
 
 # safety check
-if [ ! -f ~/.protoncore/.proton.conf ]; then
-  cp share/proton.conf.example ~/.protoncore/proton.conf
+if [ ! -f ~/.phasecore/.phase.conf ]; then
+  cp share/phase.conf.example ~/.phasecore/phase.conf
 fi

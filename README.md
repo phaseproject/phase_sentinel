@@ -3,7 +3,7 @@
 
 Sentinel is an autonomous agent for persisting, processing and automating Proton governance objects and tasks.
 
-Sentinel is implemented as a Python application that binds to a local version protond instance on each Phase Masternode.
+Sentinel is implemented as a Python application that binds to a local version phased instance on each Phase Masternode.
 
 This guide covers installing Sentinel onto an existing Masternode in Ubuntu 14.04 / 16.04.
 
@@ -38,7 +38,7 @@ Set up a crontab entry to call Sentinel every minute:
 
     $ crontab -e
 
-In the crontab editor, add the lines below, replacing '/home/YOURUSERNAME/proton_sentinel' to the path where you cloned sentinel to:
+In the crontab editor, add the lines below, replacing '/home/YOURUSERNAME/phase_sentinel' to the path where you cloned sentinel to:
 
     * * * * * cd /home/YOURUSERNAME/phase_sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1
 
@@ -48,7 +48,7 @@ Test the config by runnings all tests from the sentinel folder you cloned into
 
     $ ./venv/bin/py.test ./test
 
-With all tests passing and crontab setup, Sentinel will stay in sync with protond and the installation is complete
+With all tests passing and crontab setup, Sentinel will stay in sync with phased and the installation is complete
 
 ## Configuration
 

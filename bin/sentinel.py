@@ -19,7 +19,7 @@ from scheduler import Scheduler
 import argparse
 
 
-# sync protond gobject list with our local relational DB backend
+# sync phased gobject list with our local relational DB backend
 def perform_phased_object_sync(phased):
     GovernanceObject.sync(phased)
 
@@ -106,7 +106,7 @@ def attempt_superblock_creation(phased):
         printdbg("Not in maturity phase yet -- will not attempt Superblock")
         return
 
-    proposals = Proposal.approved_and_ranked(proposal_quorum=protond.governance_quorum(), next_superblock_max_budget=protond.next_superblock_max_budget())
+    proposals = Proposal.approved_and_ranked(proposal_quorum=phased.governance_quorum(), next_superblock_max_budget=phased.next_superblock_max_budget())
     budget_max = phased.get_superblock_budget_allocation(event_block_height)
     sb_epoch_time = phased.block_height_to_epoch(event_block_height)
 
@@ -157,7 +157,7 @@ def is_phased_port_open(phased):
 
 
 def main():
-    phased = PhaseDaemon.from_proton_conf(config.phase_conf)
+    phased = PhaseDaemon.from_phase_conf(config.phase_conf)
     options = process_args()
 
     # check phased connectivity

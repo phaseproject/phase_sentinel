@@ -57,23 +57,23 @@ def is_database_correctly_configured():
     return configured
 
 
-def has_proton_conf():
+def has_phase_conf():
     import config
     import io
 
-    valid_proton_conf = False
+    valid_phase_conf = False
 
-    # ensure proton_conf exists & readable
+    # ensure phase_conf exists & readable
     #
     # if not, print a message stating that Proton Core must be installed and
-    # configured, including JSONRPC access in proton.conf
+    # configured, including JSONRPC access in phase.conf
     try:
-        f = io.open(config.proton_conf)
-        valid_proton_conf = True
+        f = io.open(config.phase_conf)
+        valid_phase_conf = True
     except IOError as e:
         print(e)
 
-    return valid_proton_conf
+    return valid_phase_conf
 
 
 # === begin main
@@ -95,8 +95,8 @@ def main():
         print("Please ensure correct database configuration.")
         sys.exit(1)
 
-    if not has_proton_conf():
-        print("ProtonCore must be installed and configured, including JSONRPC access in proton.conf")
+    if not has_phase_conf():
+        print("ProtonCore must be installed and configured, including JSONRPC access in phase.conf")
         sys.exit(1)
 
 

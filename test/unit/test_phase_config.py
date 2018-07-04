@@ -6,13 +6,13 @@ os.environ['SENTINEL_CONFIG'] = os.path.normpath(os.path.join(os.path.dirname(__
 os.environ['SENTINEL_ENV'] = 'test'
 sys.path.append(os.path.normpath(os.path.join(os.path.dirname(__file__), '../../lib')))
 import config
-from proton_config import ProtonConfig
+from phase_config import ProtonConfig
 
 
 @pytest.fixture
-def proton_conf(**kwargs):
+def phase_conf(**kwargs):
     defaults = {
-        'rpcuser': 'protonrpc',
+        'rpcuser': 'phaserpc',
         'rpcpassword': 'EwJeV3fZTyTVozdECF627BkBMnNDwQaVLakG3A4wXYyk',
         'rpcport': 29241,
     }
@@ -34,35 +34,35 @@ rpcport={rpcport}
 
 
 def test_get_rpc_creds():
-    proton_config = proton_conf()
-    creds = ProtonConfig.get_rpc_creds(proton_config, 'testnet')
+    phase_config = phase_conf()
+    creds = ProtonConfig.get_rpc_creds(phase_config, 'testnet')
 
     for key in ('user', 'password', 'port'):
         assert key in creds
-    assert creds.get('user') == 'protonrpc'
+    assert creds.get('user') == 'phaserpc'
     assert creds.get('password') == 'EwJeV3fZTyTVozdECF627BkBMnNDwQaVLakG3A4wXYyk'
     assert creds.get('port') == 29241
 
-    proton_config = proton_conf(rpcpassword='s00pers33kr1t', rpcport=8000)
-    creds = ProtonConfig.get_rpc_creds(proton_config, 'testnet')
+    phase_config = phase_conf(rpcpassword='s00pers33kr1t', rpcport=8000)
+    creds = ProtonConfig.get_rpc_creds(phase_config, 'testnet')
 
     for key in ('user', 'password', 'port'):
         assert key in creds
-    assert creds.get('user') == 'protonrpc'
+    assert creds.get('user') == 'phaserpc'
     assert creds.get('password') == 's00pers33kr1t'
     assert creds.get('port') == 8000
 
-    no_port_specified = re.sub('\nrpcport=.*?\n', '\n', proton_conf(), re.M)
+    no_port_specified = re.sub('\nrpcport=.*?\n', '\n', phase_conf(), re.M)
     creds = ProtonConfig.get_rpc_creds(no_port_specified, 'testnet')
 
     for key in ('user', 'password', 'port'):
         assert key in creds
-    assert creds.get('user') == 'protonrpc'
+    assert creds.get('user') == 'phaserpc'
     assert creds.get('password') == 'EwJeV3fZTyTVozdECF627BkBMnNDwQaVLakG3A4wXYyk'
     assert creds.get('port') == 19998
 
 
-# ensure proton network (mainnet, testnet) matches that specified in config
-# requires running protond on whatever port specified...
+# ensure phase network (mainnet, testnet) matches that specified in config
+# requires running phased on whatever port specified...
 #
-# This is more of a protond/jsonrpc test than a config test...
+# This is more of a phased/jsonrpc test than a config test...

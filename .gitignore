@@ -12,9 +12,9 @@ lib/base58.pyc
 lib/config.pyc
 lib/governance_class.pyc
 lib/init.pyc
-lib/proton_config.pyc
-lib/protond.pyc
-lib/protonlib.pyc
+lib/phase_config.pyc
+lib/phased.pyc
+lib/phaselib.pyc
 lib/masternode.pyc
 lib/misc.pyc
 lib/models.pyc

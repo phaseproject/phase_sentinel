@@ -3,7 +3,7 @@
 """
 import sys
 import os
-from proton_config import ProtonConfig
+from phase_config import ProtonConfig
 
 default_sentinel_config = os.path.normpath(
     os.path.join(os.path.dirname(__file__), '../sentinel.conf')
@@ -11,19 +11,19 @@ default_sentinel_config = os.path.normpath(
 sentinel_config_file = os.environ.get('SENTINEL_CONFIG', default_sentinel_config)
 sentinel_cfg = ProtonConfig.tokenize(sentinel_config_file)
 sentinel_version = "1.1.0"
-min_protond_proto_version_with_sentinel_ping = 70207
+min_phased_proto_version_with_sentinel_ping = 70207
 
 
-def get_proton_conf():
+def get_phase_conf():
     home = os.environ.get('HOME')
 
-    proton_conf = os.path.join(home, ".protoncore/proton.conf")
+    phase_conf = os.path.join(home, ".phasecore/phase.conf")
     if sys.platform == 'darwin':
-        proton_conf = os.path.join(home, "Library/Application Support/ProtonCore/proton.conf")
+        phase_conf = os.path.join(home, "Library/Application Support/ProtonCore/phase.conf")
 
-    proton_conf = sentinel_cfg.get('proton_conf', proton_conf)
+    phase_conf = sentinel_cfg.get('phase_conf', phase_conf)
 
-    return proton_conf
+    return phase_conf
 
 
 def get_network():
@@ -79,6 +79,6 @@ def get_db_conn():
     return db
 
 
-proton_conf = get_proton_conf()
+phase_conf = get_phase_conf()
 network = get_network()
 db = get_db_conn()
