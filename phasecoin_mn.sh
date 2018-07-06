@@ -18,6 +18,7 @@ sudo apt-get install build-essential libtool autotools-dev pkg-config libssl-dev
 sudo apt-get install libboost-all-dev -y
 sudo apt-get install libevent-dev -y
 sudo apt-get install libminiupnpc-dev -y
+sudo apt-get install libzmq3-dev
 sudo apt-get install autoconf -y
 sudo apt-get install automake -y
 sudo apt-get update
