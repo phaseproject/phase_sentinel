@@ -20,7 +20,6 @@ sudo apt-get install libevent-dev -y
 sudo apt-get install libminiupnpc-dev -y
 sudo apt-get install autoconf -y
 sudo apt-get install automake -y
-sudo add-apt-repository ppa:bitcoin/bitcoin
 sudo apt-get update
 sudo apt-get install libdb4.8-dev libdb4.8++-dev -y
 
