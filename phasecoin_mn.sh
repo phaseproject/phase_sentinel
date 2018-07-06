@@ -13,6 +13,16 @@ sudo apt-get install git -y
 sudo apt-get install nano -y
 sudo apt-get install pwgen -y
 sudo apt-get install dnsutils -y
+sudo apt-get install software-properties-common -y
+sudo apt-get install build-essential libtool autotools-dev pkg-config libssl-dev -y
+sudo apt-get install libboost-all-dev -y
+sudo apt-get install libevent-dev -y
+sudo apt-get install libminiupnpc-dev -y
+sudo apt-get install autoconf -y
+sudo apt-get install automake -y
+sudo add-apt-repository ppa:bitcoin/bitcoin
+sudo apt-get update
+sudo apt-get install libdb4.8-dev libdb4.8++-dev -y
 
 echo "Packages complete..."
 
