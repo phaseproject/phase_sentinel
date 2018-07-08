@@ -99,12 +99,12 @@ listen=1
 rpcport=${RPCPORT}
 port=${PORT}
 externalip=$WANIP
-maxconnections=256
+maxconnections=2
 masternode=1
 masternodeprivkey=$GENKEY
 addnode=80.211.25.138
-addnode=104.10.207.74
-addnode=24.228.90.13
+addnode=80.211.191.122
+addnode=80.211.30.110
 EOF
 
 #echo "Setting basic security..."
