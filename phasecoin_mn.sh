@@ -53,7 +53,7 @@ wget https://github.com/phaseproject/phase/releases/download/2.1.1.1/phase_2.1.1
 
 rm -rf phase
 tar -zxvf phase_2.1.1_ubuntu16.tar.gz
-mv phase_2.1.1_ubuntu16.tar.gz phase
+mv phase_2.1.1_ubuntu16 phase
 
 echo "Loading and syncing wallet"
 
