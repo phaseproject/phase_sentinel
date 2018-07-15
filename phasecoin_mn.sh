@@ -49,11 +49,11 @@ free -h
 echo "SWAP setup complete..."
 #end optional swap section
 
-wget https://github.com/phaseproject/phase/releases/download/2.1.1.1/phase_2.1.1_ubuntu16.tar.gz
+wget https://github.com/phaseproject/phase/releases/download/2.1.2/phase_2.1.2_ubuntu16.tar.gz
 
 rm -rf phase
-tar -zxvf phase_2.1.1_ubuntu16.tar.gz
-mv phase_2.1.1_ubuntu16 phase
+tar -zxvf phase_2.1.2_ubuntu16.tar.gz
+mv phase_2.1.2_ubuntu16 phase
 
 echo "Loading and syncing wallet"
 
