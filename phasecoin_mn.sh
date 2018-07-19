@@ -103,8 +103,8 @@ maxconnections=256
 masternode=1
 masternodeprivkey=$GENKEY
 addnode=80.211.25.138
-addnode=80.211.191.122
-addnode=80.211.30.110
+addnode=45.76.25.114
+addnode=64.111.98.21
 EOF
 
 #echo "Setting basic security..."
